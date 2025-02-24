@@ -6,11 +6,17 @@
 /*   By: quentin <quentin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:12:18 by quentin           #+#    #+#             */
-/*   Updated: 2025/02/20 19:11:54 by quentin          ###   ########.fr       */
+/*   Updated: 2025/02/24 12:26:07 by quentin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int render_wrapper(void *param)
+{
+    render_map((t_game *)param);
+    return (0);
+}
 
 void close_game(t_game *game)
 {
@@ -53,8 +59,9 @@ int main(int argc, char **argv)
     mlx_key_hook(game.win, handle_keypress, &game);
     find_player_position(&game);
     render_map(&game);
-
+    mlx_loop_hook(game.mlx, render_wrapper, &game);
     mlx_loop(game.mlx);
-
+    
+    
     return (0);
 }
