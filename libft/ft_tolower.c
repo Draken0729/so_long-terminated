@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quentin <quentin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:55:02 by qbaret            #+#    #+#             */
-/*   Updated: 2024/11/08 13:45:24 by quentin          ###   ########.fr       */
+/*   Updated: 2025/02/25 13:33:22 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	ft_tolower(int c)
 	return (c);
 }
 
-/*int main(void) 
+/*int main(void)
 {
-    char upper = 'A';
-	
+	char upper = 'A';
+
 	printf("%c\n", ft_tolower(upper));
-	return 0;
+	return (0);
 }*/

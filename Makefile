@@ -5,7 +5,7 @@ ft_printf = ft_printf/ft_printf.a
 GNL = GNL/get_next_line.c
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRC = main.c map.c game.c error1.c error2.c $(GNL)
+SRC = main.c map.c game1.c game2.c error1.c error2.c error3.c $(GNL)
 OBJ = $(SRC:.c=.o)
 LIBS = -lXext -lX11 -lm
 

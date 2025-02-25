@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quentin <quentin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:21:26 by qbaret            #+#    #+#             */
-/*   Updated: 2024/11/12 11:25:19 by quentin          ###   ########.fr       */
+/*   Updated: 2025/02/25 13:32:43 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ unsigned int	ft_strlcat(char *dest, const char *src, unsigned int size)
 		dest[dest_end] = '\0';
 	return (dest_end + src_end - j);
 }
-/*int	main()
+/*int	main(void)
 {
 	char	dest[30] = "bonjour";
 	char	src[] = "hello";
 	unsigned int	size = 13;
-	
+
 	printf("%u\n", ft_strlcat(dest, src, size));
 	printf("%s\n", dest);
 	return (0);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.c                                             :+:      :+:    :+:   */
+/*   game1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 11:17:22 by quentin           #+#    #+#             */
-/*   Updated: 2025/02/25 11:46:51 by qbaret           ###   ########.fr       */
+/*   Updated: 2025/02/25 13:27:39 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	handle_keypress(int keycode, t_game *game)
 		move_player(game, 1, 0);
 	return (0);
 }
+
 void	handle_movement(t_game *game, int new_x, int new_y)
 {
 	if (game->map[new_y][new_x] == '1')
@@ -86,45 +87,4 @@ void	move_player(t_game *game, int dx, int dy)
 	new_x = game->player_x + dx;
 	new_y = game->player_y + dy;
 	handle_movement(game, new_x, new_y);
-}
-
-void	find_player_position(t_game *game)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (game->map[y])
-	{
-		x = 0;
-		while (game->map[y][x])
-		{
-			if (game->map[y][x] == 'P')
-			{
-				game->player_x = x;
-				game->player_y = y;
-				return ;
-			}
-			x++;
-		}
-		y++;
-	}
-}
-void	count_collectibles(t_game *game)
-{
-	int x, y;
-	game->collectibles = 0;
-	game->collected = 0;
-	y = 0;
-	while (game->map[y])
-	{
-		x = 0;
-		while (game->map[y][x])
-		{
-			if (game->map[y][x] == 'C')
-				game->collectibles++;
-			x++;
-		}
-		y++;
-	}
 }

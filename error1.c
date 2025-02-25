@@ -6,36 +6,18 @@
 /*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 10:29:37 by quentin           #+#    #+#             */
-/*   Updated: 2025/02/25 11:46:36 by qbaret           ###   ########.fr       */
+/*   Updated: 2025/02/25 14:09:16 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	error_exit(char *message)
-{
-	ft_printf("Error\n%s\n", message);
-	exit(EXIT_FAILURE);
-}
-
-void	error_prog(int argc, char *filename)
-{
-	int	fd;
-
-	if (argc != 2)
-		error_exit("Invalid number of arguments. Usage: ./so_long <map.ber>");
-	if (ft_strncmp(filename + ft_strlen(filename) - 4, ".ber", 4) != 0)
-		error_exit("Unable to open the file. The file must have the .ber extension");
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		error_exit("Unable to open the file.");
-	close(fd);
-}
-
 void	validate_map_characters(char **map, int *player_count, int *exit_count,
 		int *collect_count)
 {
-	int x, y;
+	int	x;
+	int	y;
+
 	y = 0;
 	while (map[y])
 	{

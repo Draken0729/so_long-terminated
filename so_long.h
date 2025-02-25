@@ -6,7 +6,7 @@
 /*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:51:18 by quentin           #+#    #+#             */
-/*   Updated: 2025/02/25 11:49:12 by qbaret           ###   ########.fr       */
+/*   Updated: 2025/02/25 15:20:16 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 # define WIDTH 1000
 # define HEIGHT 750
-
-#  define TS 64
+# define TS 64
 
 # include "GNL/get_next_line.h"
 # include "ft_printf/ft_printf.h"
@@ -74,8 +73,7 @@ void			load_textures(t_game *game);
 int				handle_keypress(int keycode, t_game *game);
 void			move_player(t_game *game, int dx, int dy);
 void			flood_fill(char **map, int x, int y, char **visited);
-void			check_accessibility(char **map, int height, int player_x,
-					int player_y);
+void			check_accessibility(char **map, int height, t_game *game);
 void			check_mlx(t_game *game);
 void			free_map(char **map);
 void			free_game(t_game *game);
@@ -90,7 +88,6 @@ void			update_map(t_game *game, int new_x, int new_y);
 void			validate_map_characters(char **map, int *player_count,
 					int *exit_count, int *collect_count);
 char			**allocate_visited_map(char **map, int height);
-void			player_position(char **map, int width, int height,
-					int *player_x, int *player_y);
 char			**process_map(char *map_data, t_game *game);
+
 #endif

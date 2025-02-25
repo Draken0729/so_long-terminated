@@ -6,7 +6,7 @@
 /*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:40:46 by quentin           #+#    #+#             */
-/*   Updated: 2025/02/25 11:48:27 by qbaret           ###   ########.fr       */
+/*   Updated: 2025/02/25 15:18:28 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	flood_fill(char **map, int x, int y, char **visited)
 {
-	if (map[y][x] == '1' || visited[y][x] == '1')
+	if (map[y][x] == '1' || map[y][x] == 'E' || visited[y][x] == '1')
 		return ;
 	visited[y][x] = '1';
 	flood_fill(map, x + 1, y, visited);
@@ -43,33 +43,7 @@ char	**allocate_visited_map(char **map, int height)
 	return (visited);
 }
 
-void	player_position(char **map, int width, int height, int *player_x,
-		int *player_y)
-{
-	int	x;
-	int	y;
-
-	*player_x = -1;
-	*player_y = -1;
-	y = 0;
-	while (y < height)
-	{
-		x = 0;
-		while (x < width)
-		{
-			if (map[y][x] == 'P')
-			{
-				*player_x = x;
-				*player_y = y;
-				return ;
-			}
-			x++;
-		}
-		y++;
-	}
-}
-
-void	check_accessibility(char **map, int height, int player_x, int player_y)
+void	check_accessibility(char **map, int height, t_game *game)
 {
 	int		width;
 	char	**visited;
@@ -80,10 +54,10 @@ void	check_accessibility(char **map, int height, int player_x, int player_y)
 	while (map[height])
 		height++;
 	visited = allocate_visited_map(map, height);
-	player_position(map, width, height, &player_x, &player_y);
-	if (player_x == -1 || player_y == -1)
+	find_player_position(game);
+	if (game->player_x == -1 || game->player_y == -1)
 		error_exit("Player (P) is not found on the map.");
-	flood_fill(map, player_x, player_y, visited);
+	flood_fill(map, game->player_x, game->player_y, visited);
 	y = -1;
 	while (++y < height)
 	{
@@ -96,44 +70,4 @@ void	check_accessibility(char **map, int height, int player_x, int player_y)
 	while (++y < height)
 		free(visited[y]);
 	free(visited);
-}
-
-void	check_mlx(t_game *game)
-{
-	game->mlx = mlx_init();
-	if (!game->mlx)
-		error_exit("Error initializing MLX.");
-	game->win = mlx_new_window(game->mlx, game->map_width * TS,
-			game->map_height * TS, "so_long");
-	if (!game->win)
-		error_exit("Error creating the window.");
-}
-void	free_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	if (!map)
-		return ;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-}
-
-void	free_game(t_game *game)
-{
-	if (game->map)
-		free_map(game->map);
-	if (game->mlx && game->win)
-		mlx_destroy_window(game->mlx, game->win);
-	if (game->textures.player)
-		mlx_destroy_image(game->mlx, game->textures.player);
-	if (game->mlx)
-	{
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
-	}
 }

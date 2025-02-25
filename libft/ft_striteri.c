@@ -3,22 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quentin <quentin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 10:48:05 by quentin           #+#    #+#             */
-/*   Updated: 2024/11/08 11:01:33 by quentin          ###   ########.fr       */
+/*   Updated: 2025/02/25 13:32:35 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_striteri(char *s, void (*f)(unsigned int, char*))
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
 	unsigned int	i;
 
 	if (!s || !f)
-		return;
-
+		return ;
 	i = 0;
 	while (s[i])
 	{
@@ -34,15 +33,15 @@ void ft_striteri(char *s, void (*f)(unsigned int, char*))
 	}
 	return (c);
 }
-void to_upper_if_even(unsigned int i, char *c)
+void	to_upper_if_even(unsigned int i, char *c)
 {
 	if (i % 2 == 0 && *c >= 'a' && *c <= 'z')
 		*c = ft_toupper(*c);
 }
-int main()
+int	main(void)
 {
 	char str[] = "hello world!";
 	ft_striteri(str, to_upper_if_even);
 	printf("%s\n", str);
-	return 0;
+	return (0);
 }*/

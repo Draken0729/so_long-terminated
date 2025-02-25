@@ -6,7 +6,7 @@
 /*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 10:32:03 by quentin           #+#    #+#             */
-/*   Updated: 2025/02/25 11:53:19 by qbaret           ###   ########.fr       */
+/*   Updated: 2025/02/25 13:35:09 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ char	**read_map_file(char *filename, t_game *game)
 	if (fd == -1)
 		error_exit("Unable to open the map file.");
 	temp = NULL;
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		if (line[0] == '\n')
 			error_exit("Error: The map contains a blank line.");
 		temp = ft_strjoin(temp, line);
 		game->map_width = ft_strlen(line);
 		free(line);
+		line = get_next_line(fd);
 	}
 	close(fd);
 	if (!temp)
@@ -76,27 +78,29 @@ void	load_textures(t_game *game)
 	if (!game->textures.exit)
 		error_exit("Error loading exit.");
 }
-void    render_map_tile(t_game *game, int x, int y)
+
+void	render_map_tile(t_game *game, int x, int y)
 {
-    			mlx_put_image_to_window(game->mlx, game->win, game->textures.floor,
-				x * TS, y * TS);
-			if (game->map[y][x] == '1')
-				mlx_put_image_to_window(game->mlx, game->win,
-					game->textures.wall, x * TS, y * TS);
-			else if (game->map[y][x] == 'E')
-			{
-				mlx_put_image_to_window(game->mlx, game->win,
-					game->textures.exit, x * TS, y * TS);
-				game->exit_x = x;
-				game->exit_y = y;
-			}
-			else if (game->map[y][x] == 'P')
-				mlx_put_image_to_window(game->mlx, game->win,
-					game->textures.player, x * TS, y * TS);
-			else if (game->map[y][x] == 'C')
-				mlx_put_image_to_window(game->mlx, game->win,
-					game->textures.collectible, x * TS, y * TS);
+	mlx_put_image_to_window(game->mlx, game->win, game->textures.floor, x * TS,
+		y * TS);
+	if (game->map[y][x] == '1')
+		mlx_put_image_to_window(game->mlx, game->win, game->textures.wall, x
+			* TS, y * TS);
+	else if (game->map[y][x] == 'E')
+	{
+		mlx_put_image_to_window(game->mlx, game->win, game->textures.exit, x
+			* TS, y * TS);
+		game->exit_x = x;
+		game->exit_y = y;
+	}
+	else if (game->map[y][x] == 'P')
+		mlx_put_image_to_window(game->mlx, game->win, game->textures.player, x
+			* TS, y * TS);
+	else if (game->map[y][x] == 'C')
+		mlx_put_image_to_window(game->mlx, game->win,
+			game->textures.collectible, x * TS, y * TS);
 }
+
 void	render_map(t_game *game)
 {
 	int	x;
@@ -107,6 +111,6 @@ void	render_map(t_game *game)
 	{
 		x = -1;
 		while (game->map[y][++x])
-            render_map_tile(game, x, y);
+			render_map_tile(game, x, y);
 	}
 }

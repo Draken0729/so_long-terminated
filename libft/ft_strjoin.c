@@ -6,7 +6,7 @@
 /*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 10:38:48 by quentin           #+#    #+#             */
-/*   Updated: 2025/02/25 10:42:01 by qbaret           ###   ########.fr       */
+/*   Updated: 2025/02/25 13:58:33 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ size_t	ft_strlen(const char *s)
 	}
 	return (i);
 }
+
 int	ft_strcpy(char *dest, const char *src)
 {
 	int	i;
@@ -36,15 +37,16 @@ int	ft_strcpy(char *dest, const char *src)
 	dest[i] = '\0';
 	return (i);
 }
+
 unsigned int	ft_strcat(char *dest, const char *src)
 {
 	int	i;
 	int	j;
-	int src_len;
+	int	src_len;
 
 	i = 0;
 	j = 0;
-    src_len = 0;
+	src_len = 0;
 	while (dest[i] != '\0')
 		i++;
 	while (src[src_len] != '\0')
@@ -58,32 +60,33 @@ unsigned int	ft_strcat(char *dest, const char *src)
 	dest[i] = '\0';
 	return (i);
 }
-char *ft_strjoin(char *s1, char *s)
+
+char	*ft_strjoin(char *s1, char *s)
 {
-	size_t len1 = ft_strlen(s1);
-    size_t len2 = ft_strlen(s);
-    char *result = malloc(len1 + len2 + 1);
+	size_t	len1;
+	size_t	len2;
+	char	*result;
 
-    if (result == NULL)
-        return NULL;
-
-    ft_strcpy(result, s1);
-
-    ft_strcat(result, s);
-
-    return result;
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s);
+	result = malloc(len1 + len2 + 1);
+	if (result == NULL)
+		return (NULL);
+	ft_strcpy(result, s1);
+	ft_strcat(result, s);
+	return (result);
 }
 /*int main()
 {
-    char *s1 = "Hello, ";
-    char *s2 = "world!";
-    char *joined = ft_strjoin(s1, s2);
+	char *s1 = "Hello, ";
+	char *s2 = "world!";
+	char *joined = ft_strjoin(s1, s2);
 
-    if (joined != NULL)
-    {
-        printf("%s\n", joined);  // Affiche : Hello, world!
-        free(joined);            // Libère la mémoire allouée
-    }
+	if (joined != NULL)
+	{
+		printf("%s\n", joined);  // Affiche : Hello, world!
+		free(joined);            // Libère la mémoire allouée
+	}
 
-    return 0;
+	return (0);
 }*/

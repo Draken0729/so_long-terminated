@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quentin <quentin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:38:58 by qbaret            #+#    #+#             */
-/*   Updated: 2025/02/20 18:07:33 by quentin          ###   ########.fr       */
+/*   Updated: 2025/02/25 13:29:26 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ unsigned int	ft_printhex_min(unsigned int nombre)
 		buffer[index] = '0';
 		write(1, &buffer[index], 1);
 		return (1);
-	}	
+	}
 	while (nombre > 0 && index >= 0)
 	{
 		buffer[index--] = hex_digits[nombre % 16];

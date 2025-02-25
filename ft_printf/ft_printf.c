@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quentin <quentin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 16:51:14 by qbaret            #+#    #+#             */
-/*   Updated: 2025/02/20 18:16:40 by quentin          ###   ########.fr       */
+/*   Updated: 2025/02/25 13:29:50 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	ft_putunbr(unsigned int n)
 	i++;
 	return (i);
 }
+
 static int	ft_handle(char c, va_list args)
 {
 	if (c == 'c')

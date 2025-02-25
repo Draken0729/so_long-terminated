@@ -6,7 +6,7 @@
 /*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:27:43 by qbaret            #+#    #+#             */
-/*   Updated: 2024/11/05 15:46:35 by qbaret           ###   ########.fr       */
+/*   Updated: 2025/02/25 13:33:26 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	ft_toupper(int c)
 	return (c);
 }
 
-/*int main(void) 
+/*int main(void)
 {
-    char lower = 'a';
-	
+	char lower = 'a';
+
 	printf("%c\n", ft_toupper(lower));
-	return 0;
+	return (0);
 }*/

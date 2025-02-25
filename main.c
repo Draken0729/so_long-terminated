@@ -6,7 +6,7 @@
 /*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:12:18 by quentin           #+#    #+#             */
-/*   Updated: 2025/02/25 11:47:02 by qbaret           ###   ########.fr       */
+/*   Updated: 2025/02/25 14:41:03 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	close_game(t_game *game)
 	free(game->mlx);
 	exit(0);
 }
+
 int	close_game_hook(void *param)
 {
 	t_game	*game;
@@ -39,6 +40,7 @@ int	close_game_hook(void *param)
 	close_game(game);
 	return (0);
 }
+
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -48,7 +50,7 @@ int	main(int argc, char **argv)
 	count_collectibles(&game);
 	error_map(game.map);
 	check_walls(game.map);
-	check_accessibility(game.map, 0, 0, 0);
+	check_accessibility(game.map, 0, &game);
 	check_mlx(&game);
 	load_textures(&game);
 	render_map(&game);
