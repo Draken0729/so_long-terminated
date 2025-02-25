@@ -6,7 +6,7 @@
 /*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:51:18 by quentin           #+#    #+#             */
-/*   Updated: 2025/02/25 15:20:16 by qbaret           ###   ########.fr       */
+/*   Updated: 2025/02/25 15:55:10 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void			render_map(t_game *game);
 void			load_textures(t_game *game);
 int				handle_keypress(int keycode, t_game *game);
 void			move_player(t_game *game, int dx, int dy);
-void			flood_fill(char **map, int x, int y, char **visited);
+void			flood_fill(char **visited, int x, int y);
 void			check_accessibility(char **map, int height, t_game *game);
 void			check_mlx(t_game *game);
 void			free_map(char **map);

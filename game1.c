@@ -6,7 +6,7 @@
 /*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 11:17:22 by quentin           #+#    #+#             */
-/*   Updated: 2025/02/25 13:27:39 by qbaret           ###   ########.fr       */
+/*   Updated: 2025/02/25 16:04:02 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,6 @@ void	handle_movement(t_game *game, int new_x, int new_y)
 			ft_printf("Congratulations! You win!\n");
 			close_game(game);
 			exit(0);
-		}
-		else
-		{
-			return ;
 		}
 	}
 	update_map(game, new_x, new_y);

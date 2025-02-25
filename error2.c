@@ -6,21 +6,23 @@
 /*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:40:46 by quentin           #+#    #+#             */
-/*   Updated: 2025/02/25 15:18:28 by qbaret           ###   ########.fr       */
+/*   Updated: 2025/02/25 16:05:21 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	flood_fill(char **map, int x, int y, char **visited)
+void	flood_fill(char **visited, int x, int y)
 {
-	if (map[y][x] == '1' || map[y][x] == 'E' || visited[y][x] == '1')
+	if (x < 0 || y < 0 || !visited[y] || x >= (int)ft_strlen(visited[y]))
 		return ;
-	visited[y][x] = '1';
-	flood_fill(map, x + 1, y, visited);
-	flood_fill(map, x - 1, y, visited);
-	flood_fill(map, x, y + 1, visited);
-	flood_fill(map, x, y - 1, visited);
+	if (visited[y][x] == '1' || visited[y][x] == 'V')
+		return ;
+	visited[y][x] = 'V';
+	flood_fill(visited, x + 1, y);
+	flood_fill(visited, x - 1, y);
+	flood_fill(visited, x, y + 1);
+	flood_fill(visited, x, y - 1);
 }
 
 char	**allocate_visited_map(char **map, int height)
@@ -57,13 +59,13 @@ void	check_accessibility(char **map, int height, t_game *game)
 	find_player_position(game);
 	if (game->player_x == -1 || game->player_y == -1)
 		error_exit("Player (P) is not found on the map.");
-	flood_fill(map, game->player_x, game->player_y, visited);
+	flood_fill(visited, game->player_x, game->player_y);
 	y = -1;
 	while (++y < height)
 	{
 		x = -1;
 		while (++x < width)
-			if ((map[y][x] == 'C' || map[y][x] == 'E') && visited[y][x] != '1')
+			if ((map[y][x] == 'C' || map[y][x] == 'E') && visited[y][x] != 'V')
 				error_exit("Not all collectibles and the exit are accessible.");
 	}
 	y = -1;
