@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quentin <quentin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 10:38:48 by quentin           #+#    #+#             */
-/*   Updated: 2025/02/20 18:25:00 by quentin          ###   ########.fr       */
+/*   Updated: 2025/02/25 10:42:01 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ unsigned int	ft_strcat(char *dest, const char *src)
 
 	i = 0;
 	j = 0;
+    src_len = 0;
 	while (dest[i] != '\0')
 		i++;
 	while (src[src_len] != '\0')

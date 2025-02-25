@@ -3,136 +3,137 @@
 /*                                                        :::      ::::::::   */
 /*   error2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quentin <quentin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:40:46 by quentin           #+#    #+#             */
-/*   Updated: 2025/02/20 15:09:45 by quentin          ###   ########.fr       */
+/*   Updated: 2025/02/25 11:48:27 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void flood_fill(char **map, int x, int y, char **visited)
+void	flood_fill(char **map, int x, int y, char **visited)
 {
-    if (map[y][x] == '1' || visited[y][x] == '1')
-        return;
-
-    visited[y][x] = '1';
-
-    flood_fill(map, x + 1, y, visited);
-    flood_fill(map, x - 1, y, visited);
-    flood_fill(map, x, y + 1, visited);
-    flood_fill(map, x, y - 1, visited);
+	if (map[y][x] == '1' || visited[y][x] == '1')
+		return ;
+	visited[y][x] = '1';
+	flood_fill(map, x + 1, y, visited);
+	flood_fill(map, x - 1, y, visited);
+	flood_fill(map, x, y + 1, visited);
+	flood_fill(map, x, y - 1, visited);
 }
 
-void check_accessibility(char **map)
+char	**allocate_visited_map(char **map, int height)
 {
-    int x;
-    int y;
-    int width = ft_strlen(map[0]);
-    int height = 0;
-    char **visited;
-    int player_x = -1, player_y = -1;
-    
-    while (map[height])
-        height++;
+	char	**visited;
+	int		y;
 
-    visited = malloc(sizeof(char *) * (height + 1));
-    if (!visited)
-        error_exit("Memory allocation error.");
-    
-    y = 0;
-    while(y < height)
-    {
-        visited[y] = ft_strdup(map[y]);
-        if (!visited[y])
-            error_exit("Memory allocation error.");
-		y++;
-    }
-    visited[height] = NULL;
-
-    y = 0;
-    while(y < height)
-    {
-        x = 0;
-        while(x < width)
-        {
-            if (map[y][x] == 'P')
-            {
-                player_x = x;
-                player_y = y;
-                break;
-            }
-			x++;
-        }
-        if (player_x != -1)
-            break;
-        y++;
-    }
-
-    flood_fill(map, player_x, player_y, visited);
-
-    if (player_x == -1 || player_y == -1)
-    error_exit("Player (P) is not found on the map.");
-    
-    y = 0;
-    while(y < height)
-    {
-        x = 0;
-        while(x < width)
-        {
-            if ((map[y][x] == 'C' || map[y][x] == 'E') && visited[y][x] != '1')
-                error_exit("Not all collectibles and the exit are accessible.");
-			x++;
-        }
-		y++;
-    }
-
-    y = 0;
-    while(y < height)
+	visited = malloc(sizeof(char *) * (height + 1));
+	if (!visited)
+		error_exit("Memory allocation error.");
+	y = 0;
+	while (y < height)
 	{
-        free(visited[y]);
+		visited[y] = ft_strdup(map[y]);
+		if (!visited[y])
+			error_exit("Memory allocation error.");
 		y++;
 	}
-    free(visited);
-}
-void check_mlx(t_game *game)
-{
-    game->mlx = mlx_init();
-    if (!game->mlx)
-        error_exit("Error initializing MLX.");
-
-    game->win = mlx_new_window(game->mlx, game->map_width * TILE_SIZE, game->map_height * TILE_SIZE, "so_long");
-    if (!game->win)
-        error_exit("Error creating the window.");
-}
-void free_map(char **map)
-{
-    int i = 0;
-    if (!map)
-        return;
-    while (map[i])
-    {
-        free(map[i]);
-        i++;
-    }
-    free(map);
+	visited[height] = NULL;
+	return (visited);
 }
 
-void free_game(t_game *game)
+void	player_position(char **map, int width, int height, int *player_x,
+		int *player_y)
 {
-    if (game->map)
-        free_map(game->map);
+	int	x;
+	int	y;
 
-    if (game->mlx && game->win)
-        mlx_destroy_window(game->mlx, game->win);
+	*player_x = -1;
+	*player_y = -1;
+	y = 0;
+	while (y < height)
+	{
+		x = 0;
+		while (x < width)
+		{
+			if (map[y][x] == 'P')
+			{
+				*player_x = x;
+				*player_y = y;
+				return ;
+			}
+			x++;
+		}
+		y++;
+	}
+}
 
-    if (game->textures.player)
-        mlx_destroy_image(game->mlx, game->textures.player);
-    
-    if (game->mlx)
-    {
-        mlx_destroy_display(game->mlx);
-        free(game->mlx);
-    }
+void	check_accessibility(char **map, int height, int player_x, int player_y)
+{
+	int		width;
+	char	**visited;
+	int		x;
+	int		y;
+
+	width = ft_strlen(map[0]);
+	while (map[height])
+		height++;
+	visited = allocate_visited_map(map, height);
+	player_position(map, width, height, &player_x, &player_y);
+	if (player_x == -1 || player_y == -1)
+		error_exit("Player (P) is not found on the map.");
+	flood_fill(map, player_x, player_y, visited);
+	y = -1;
+	while (++y < height)
+	{
+		x = -1;
+		while (++x < width)
+			if ((map[y][x] == 'C' || map[y][x] == 'E') && visited[y][x] != '1')
+				error_exit("Not all collectibles and the exit are accessible.");
+	}
+	y = -1;
+	while (++y < height)
+		free(visited[y]);
+	free(visited);
+}
+
+void	check_mlx(t_game *game)
+{
+	game->mlx = mlx_init();
+	if (!game->mlx)
+		error_exit("Error initializing MLX.");
+	game->win = mlx_new_window(game->mlx, game->map_width * TS,
+			game->map_height * TS, "so_long");
+	if (!game->win)
+		error_exit("Error creating the window.");
+}
+void	free_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	if (!map)
+		return ;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}
+
+void	free_game(t_game *game)
+{
+	if (game->map)
+		free_map(game->map);
+	if (game->mlx && game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->textures.player)
+		mlx_destroy_image(game->mlx, game->textures.player);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
 }
