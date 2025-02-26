@@ -6,7 +6,7 @@
 /*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:51:18 by quentin           #+#    #+#             */
-/*   Updated: 2025/02/25 15:55:10 by qbaret           ###   ########.fr       */
+/*   Updated: 2025/02/26 11:05:12 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void			free_map(char **map);
 void			free_game(t_game *game);
 void			error_exit(char *message);
 void			error_prog(int argc, char *filename);
+void            error_exit_map(char *message, char **map);
 void			error_map(char **map);
 void			check_walls(char **map);
 void			find_player_position(t_game *game);

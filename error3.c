@@ -6,12 +6,18 @@
 /*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:59:28 by qbaret            #+#    #+#             */
-/*   Updated: 2025/02/25 13:27:17 by qbaret           ###   ########.fr       */
+/*   Updated: 2025/02/26 11:00:49 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	error_exit_map(char *message, char **map)
+{
+	ft_printf("Error\n%s\n", message);
+    free_map(map);
+	exit(EXIT_FAILURE);
+}
 void	error_exit(char *message)
 {
 	ft_printf("Error\n%s\n", message);
@@ -58,17 +64,4 @@ void	free_map(char **map)
 	free(map);
 }
 
-void	free_game(t_game *game)
-{
-	if (game->map)
-		free_map(game->map);
-	if (game->mlx && game->win)
-		mlx_destroy_window(game->mlx, game->win);
-	if (game->textures.player)
-		mlx_destroy_image(game->mlx, game->textures.player);
-	if (game->mlx)
-	{
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
-	}
-}
+

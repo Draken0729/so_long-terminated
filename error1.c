@@ -6,7 +6,7 @@
 /*   By: qbaret <qbaret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 10:29:37 by quentin           #+#    #+#             */
-/*   Updated: 2025/02/25 14:09:16 by qbaret           ###   ########.fr       */
+/*   Updated: 2025/02/26 11:02:55 by qbaret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	validate_map_characters(char **map, int *player_count, int *exit_count,
 			else if (map[y][x] == 'C')
 				(*collect_count)++;
 			else if (map[y][x] != '1' && map[y][x] != '0')
-				error_exit("Invalid character in the map.");
+				error_exit_map("Invalid character in the map.", map);
 			x++;
 		}
 		y++;
@@ -51,11 +51,11 @@ void	error_map(char **map)
 		error_exit("Invalid map.");
 	validate_map_characters(map, &player_count, &exit_count, &collect_count);
 	if (player_count != 1)
-		error_exit("There must be exactly one player on the map.");
+		error_exit_map("There must be exactly one player on the map.", map);
 	if (exit_count != 1)
-		error_exit("There must be exactly one exit on the map.");
+		error_exit_map("There must be exactly one exit on the map.", map);
 	if (collect_count < 1)
-		error_exit("There must be at least one collectible.");
+		error_exit_map("There must be at least one collectible.", map);
 }
 
 void	check_walls(char **map)
@@ -74,15 +74,15 @@ void	check_walls(char **map)
 	while (x < width)
 	{
 		if (map[0][x] != '1' || map[height - 1][x] != '1')
-			error_exit("The map is not surrounded by walls.");
+			error_exit_map("The map is not surrounded by walls.", map);
 		x++;
 	}
 	while (y < height)
 	{
 		if (map[y][0] != '1' || map[y][width - 1] != '1')
-			error_exit("The map is not surrounded by walls.");
+			error_exit_map("The map is not surrounded by walls.", map);
 		y++;
 	}
 	if (width == height)
-		error_exit("The map is not rectangular.");
+		error_exit_map("The map is not rectangular.", map);
 }
